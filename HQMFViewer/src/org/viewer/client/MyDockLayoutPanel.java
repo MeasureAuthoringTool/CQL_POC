@@ -270,7 +270,7 @@ public class MyDockLayoutPanel extends ComplexPanel implements AnimatedLayout,
   public void forceLayout() {
     layoutCmd.cancel();
     doLayout();
-    layout.layout(200);
+    layout.layout(500);
     onResize();
   }
 

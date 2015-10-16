@@ -59,7 +59,7 @@ import com.google.gwt.user.client.ui.Widget;
  * {@example com.google.gwt.examples.SplitLayoutPanelExample}
  * </p>
  */
-public class MySplitPanel extends DockLayoutPanel {
+public class MySplitPanel extends MyDockLayoutPanel {
 
   class HSplitter extends Splitter {
     public HSplitter(Widget target, boolean reverse) {

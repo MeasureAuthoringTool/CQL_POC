@@ -108,7 +108,7 @@ public class HQMFViewer implements EntryPoint {
 		mySplitPanel.setWidgetToggleDisplayAllowed(testVerticalPanel, true);
 
 		tabLayoutPanel.add(splitLayoutPanel, "HQMF Viewer");
-		tabLayoutPanel.add(mySplitPanel, "CQL Split Panel.");
+		tabLayoutPanel.add(mySplitPanel, "test CQL Split Panel.");
 		
 		RootLayoutPanel.get().add(tabLayoutPanel);
 	}
