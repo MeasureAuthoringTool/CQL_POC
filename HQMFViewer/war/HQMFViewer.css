@@ -1,0 +1,95 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+.boxsizingBorder {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.textarea_noborder
+{  
+	width: 100%;
+	height: 100%;
+	border: none; 
+	overflow: hidden;
+	overflow-y: hidden;
+	background-color: #F2F2F2;
+	font-family: Verdana,Geneva,sans-serif; 
+    font-size: 15px; 
+}
+
+.criteriaRef_background
+{
+	background-color: #CEE3F6;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.criteriaRef_background:hover
+{
+	cursor: hand;
+	cursor: pointer;	
+}
+
+.bookMarkLabel {
+	font-family: Verdana,Geneva,sans-serif; 
+    font-size: 15px;
+    font-style: italic;
+	font-weight: bold;
+}
+
+.bookMarkLabel:hover
+{
+	cursor: hand;
+	cursor: pointer;	
+}
+
+.entry_background{
+	background-color: #BEF781;
+}
+
+.summaryVPanel {
+	margin: 5px;
+	background-color: #F2F2F2;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+
+.gwt-SplitLayoutPanel-myHDragger_left {
+  background: #e7e7e7 url(images/left_split.png) 100% 3%  no-repeat;
+}
+
+.gwt-SplitLayoutPanel-myHDragger_right {
+  background: #e7e7e7 url(images/right_split.png) 75% 3%  no-repeat;
+}
