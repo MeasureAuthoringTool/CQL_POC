@@ -5,11 +5,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -18,14 +23,26 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+
+import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
+import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
+import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
+
+//import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
+//import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
+//import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -88,22 +105,30 @@ public class HQMFViewer implements EntryPoint {
 		});
 		splitLayoutPanel.add(textArea);
 		
-		MySplitPanel mySplitPanel = new MySplitPanel();
+		MySplitLayoutPanel mySplitPanel = new MySplitLayoutPanel();
 		final VerticalPanel testVerticalPanel = new VerticalPanel();
 		testVerticalPanel.setSpacing(3);
-		processHQMFButton.setStyleName("summaryVPanel");
+		
 		testVerticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		testVerticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		
-		final RichTextArea testtextArea = new RichTextArea();
-		testtextArea.setTitle("test test test.");
-		testtextArea.setText("test test test.");
-		testtextArea.addStyleName("boxsizingBorder");
-		testtextArea.setWidth("100%");
-		testtextArea.setHeight("100%");
-		
+		//final RichTextArea testtextArea = getSmartTextArea();
+		//final AceEditor testtextArea = getAceEditor();
+		AceEditor aceTxtArea = new AceEditor();
+		aceTxtArea.setWidth("100%");
+		aceTxtArea.setHeight("100%");
+						
 		mySplitPanel.addEast(testVerticalPanel, 0);
-		mySplitPanel.add(testtextArea);
+		mySplitPanel.add(aceTxtArea);
+//		mySplitPanel.add(testtextArea);
+		
+		aceTxtArea.startEditor();
+		
+		aceTxtArea.setMode(AceEditorMode.CQL);
+		aceTxtArea.setTheme(AceEditorTheme.ECLIPSE);
+		aceTxtArea.getElement().getStyle().setFontSize(14, Unit.PX);
+		aceTxtArea.setHighlightSelectedWord(true);
+		aceTxtArea.setAutocompleteEnabled(true);
 		
 		mySplitPanel.setWidgetToggleDisplayAllowed(testVerticalPanel, true);
 
@@ -111,6 +136,101 @@ public class HQMFViewer implements EntryPoint {
 		tabLayoutPanel.add(mySplitPanel, "test CQL Split Panel.");
 		
 		RootLayoutPanel.get().add(tabLayoutPanel);
+	}
+
+	public RichTextArea getSmartTextArea() {
+		final RichTextArea testtextArea = new RichTextArea();
+		testtextArea.setTitle("test test test.");
+		testtextArea.setText("test test test.");
+		testtextArea.addStyleName("boxsizingBorder");
+		testtextArea.setWidth("100%");
+		testtextArea.setHeight("100%");
+		
+//		testtextArea.addKeyPressHandler(new KeyPressHandler() {
+//            @Override
+//            public void onKeyPress(KeyPressEvent event) {
+//                System.out.println( "KeyPressEvent:" +  
+//                              event.getCharCode() + ":" +
+//                              event.isAnyModifierKeyDown() + ":" + 
+//                              event.isControlKeyDown());
+//            }
+//
+//			
+//        });
+		
+		testtextArea.addKeyUpHandler(new KeyUpHandler() {
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+            	
+            	//if(event.getNativeKeyCode() == 32 && event.isControlKeyDown()){
+            	if(event.getNativeKeyCode() == 32){
+            		System.out.println("Show popup with context sensitive alternatives. Give focus to popup.");
+            		event.preventDefault();
+            		event.stopPropagation();
+//            		int xCoOrdinate = event.getNativeEvent().getScreenX();
+//            		int yCoOrdinate = event.getNativeEvent().getScreenY();
+            		
+            		RichTextArea richTextArea = (RichTextArea) event.getSource();
+            		
+            		String htmlText = richTextArea.getHTML();
+            		boolean isEndParagraphTagRemoved = false;
+            		System.out.println("before htmlText:"+htmlText);
+            		if(htmlText.endsWith("</p>")){
+            			htmlText = htmlText.substring(0, htmlText.length()-4);
+            			isEndParagraphTagRemoved = true;
+            		}
+            		
+            		System.out.println("after htmlText:"+htmlText);
+            		
+            		for(int i=htmlText.length()-2;i >= 0;i--){
+            			char c =  htmlText.charAt(i);
+            			
+            			if(c == ' '){
+            				String newText = htmlText.substring(i).trim();
+            				if(newText.length() > 0){
+            					htmlText = htmlText.substring(0, i);
+            					String setHTMLString = htmlText + " <span style='color:blue'>"+newText+" </span>" + (isEndParagraphTagRemoved?"</p>":"");
+            					System.out.println(setHTMLString);
+            					richTextArea.setHTML(setHTMLString);
+            				}else{
+            					String setHTMLString = htmlText + (isEndParagraphTagRemoved?"</p>":"");
+            					System.out.println(setHTMLString);
+            					richTextArea.setHTML(setHTMLString);
+            				}
+            				
+            				break;
+            			}
+            		}
+            		System.out.println("New html:"+richTextArea.getHTML());
+            		            		            		
+//            		System.out.println("x:"+xCoOrdinate);
+//            		System.out.println("y:"+yCoOrdinate);
+//            		
+//            		ListBox listBox = new ListBox();
+//            		listBox.addItem("define", "define");
+//            		listBox.addItem("function", "function");
+//            		listBox.addItem("library", "library");
+//            		listBox.addItem("using", "using");
+//            		listBox.addItem("include", "include");
+//            		listBox.addItem("public", "public");
+//            		listBox.addItem("private", "private");
+//            		listBox.addItem("valueset", "valueset");
+//            		listBox.addItem("List", "List");
+//            		listBox.addItem("Tuple", "Tuple");
+//            		listBox.addItem("Interval", "Interval");
+//            		
+//            		listBox.setVisibleItemCount(listBox.getItemCount()+1);
+            		
+            		//PopupPanel popupPanel = new PopupPanel(true);
+            		//popupPanel.add(listBox);
+            		//popupPanel.setPopupPosition(xCoOrdinate, yCoOrdinate);
+            		//popupPanel.show();
+            		
+            	}
+            }
+        });
+		
+		return testtextArea;
 	}
 
 	protected void handleTextAreaClick(FlowPanel flowPanel, DoubleClickEvent event, TextArea critReftextArea, ScrollPanel scrollPanel) {

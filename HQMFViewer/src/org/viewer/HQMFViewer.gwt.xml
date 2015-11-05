@@ -16,7 +16,7 @@
   <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
-
+  <inherits name='edu.ycp.cs.dh.acegwt.AceGWT'/>
   <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->
@@ -27,5 +27,5 @@
   <source path='shared'/>
 
   <!-- allow Super Dev Mode -->
-  <add-linker name="xsiframe"/>
+<!--   <add-linker name="xsiframe"/> -->
 </module>
