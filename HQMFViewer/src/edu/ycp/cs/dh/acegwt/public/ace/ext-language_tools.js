@@ -1266,8 +1266,7 @@ var Autocomplete = function() {
     this.autoInsert = true;
     this.autoSelect = true;
     this.keyboardHandler = new HashHandler();
-    this.keyboardHandler.bindKeys(this.commands);
-
+    this.keyboardHandler.bindKeys(this.commands);    
     this.blurListener = this.blurListener.bind(this);
     this.changeListener = this.changeListener.bind(this);
     this.mousedownListener = this.mousedownListener.bind(this);
@@ -1518,7 +1517,19 @@ var Autocomplete = function() {
                 return detachIfFinished();
             if (prefix.indexOf(results.prefix) !== 0 || _id != this.gatherCompletionsId)
                 return;
-
+            
+            var keyString = this.editor.keyString;
+            if(keyString == "t"){
+            	//alert("keyString:"+this.editor.keyString);
+            	matches = [];
+            	var timingKeywords = ["Concurrent With","During", "Ends After End Of", "Ends After Or Concurrent With End Of", "Ends After Or Concurrent With Start Of","Ends During", "Fulfills", "Overlaps","Starts After End Of"];
+            	this.getSpecificKeyWords(timingKeywords,matches);
+            }else if(keyString == "f"){
+            	//alert("keyString:"+this.editor.keyString);
+            	matches = [];
+            	functionKeywords = ["Age At","Avg", "Count", "Datetimediff", "Fifth","First", "Fourth", "Max","Median","Min","Most Recent","Satisfies All","Satisfies Any","Second","Sum","Third"];
+            	this.getSpecificKeyWords(functionKeywords,matches);
+            }
             this.completions = new FilteredList(matches);
             this.completions.setFilter(prefix);
             var filtered = this.completions.filtered;
@@ -1531,6 +1542,19 @@ var Autocomplete = function() {
 
             this.openPopup(this.editor, prefix, keepPopupPosition);
         }.bind(this));
+    };
+    
+    this.getSpecificKeyWords = function(keyWordArray,matches){
+    	for(i=0;i<keyWordArray.length;i++){
+    		matches.push(
+    				{
+    	                name: keyWordArray[i],
+    	                value: keyWordArray[i],
+    	                score: 0,
+    	                meta: "keyword"
+    	            }
+    				);
+    	}
     };
 
     this.cancelContextMenu = function() {
@@ -1615,14 +1639,15 @@ var Autocomplete = function() {
 Autocomplete.startCommand = {
     name: "startAutocomplete",
     exec: function(editor) {
-        if (!editor.completer)
+        if (!editor.completer){
             editor.completer = new Autocomplete();
+        }
         editor.completer.autoInsert = 
         editor.completer.autoSelect = true;
         editor.completer.showPopup(editor);
         editor.completer.cancelContextMenu();
     },
-    bindKey: "Ctrl-Space|Ctrl-Shift-Space|Alt-Space"
+    bindKey: "Ctrl-Space|Ctrl-Shift-Space|Alt-Space|Ctrl-Shift-t|Ctrl-Shift-f"
 };
 
 var FilteredList = function(array, filterText, mutateData) {

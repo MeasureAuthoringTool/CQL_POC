@@ -3981,7 +3981,9 @@ var KeyBinding = function(editor) {
             if (toExecute.command == "null") {
                 success = true;
             } else {
-                success = commands.exec(toExecute.command, this.$editor, toExecute.args, e);                
+                var aceEditor = this.$editor;
+                aceEditor.keyString = keyString;
+            	success = commands.exec(toExecute.command, aceEditor, toExecute.args, e);                
             }
             if (success && e && hashId != -1 && 
                 toExecute.passEvent != true && toExecute.command.passEvent != true
