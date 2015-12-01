@@ -9,11 +9,11 @@ var SqlHighlightRules = function() {
     var keywords = (
         "library|version|using|include|called|public|private|parameter|default|codesystem|valueset|codesystems|define|function|with|such that|without|" +
         "in|from|where|return|all|distinct|sort|by|asc|desc|is|not|cast|as|between|difference|contains|and|or|xor|union|intersection|year|month|day|hour|minute|" +
-        "second|millisecond|when|then|or before|or after|or more|or less|MeasurementPeriod|context|Patient|Population|QDM|"
+        "second|millisecond|when|then|or before|or after|or more|or less|context"
     );
 
     var builtinConstants = (
-        "true|false|null"
+        "true|false|null|QDM|Patient|Population|MeasurementPeriod"
     );
 
     var builtinFunctions = (
