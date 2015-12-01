@@ -1522,12 +1522,17 @@ var Autocomplete = function() {
             if(keyString == "t"){
             	//alert("keyString:"+this.editor.keyString);
             	matches = [];
-            	var timingKeywords = ["Concurrent With","During", "Ends After End Of", "Ends After Or Concurrent With End Of", "Ends After Or Concurrent With Start Of","Ends During", "Fulfills", "Overlaps","Starts After End Of"];
+            	var timingKeywords = ["Concurrent With","During", "Ends After End Of", "Ends After Or Concurrent With End Of", "Ends After Or Concurrent With Start Of","Ends After Start Of",
+            	                      "Ends Before End Of","Ends Before Or Concurrent With End Of","Ends Before Or Concurrent With Start Of",
+            	                      "Ends Before Start Of","Ends Concurrent With","Ends Concurrent With Start Of","Ends During", "Fulfills", "Overlaps","Starts After End Of",
+            	                      "Starts After Or Concurrent With End Of","Starts After Or Concurrent With Start Of","Starts After Start Of","Starts Before End Of",
+            	                      "Starts Before Or Concurrent With End Of","Starts Before Or Concurrent With Start Of","Starts Before Start Of","Starts Concurrent With",
+            	                      "Starts Concurrent With End Of","Starts During"];
             	this.getSpecificKeyWords(timingKeywords,matches);
             }else if(keyString == "f"){
             	//alert("keyString:"+this.editor.keyString);
             	matches = [];
-            	functionKeywords = ["Age At","Avg", "Count", "Datetimediff", "Fifth","First", "Fourth", "Max","Median","Min","Most Recent","Satisfies All","Satisfies Any","Second","Sum","Third"];
+            	var functionKeywords = ["Age At","Avg", "Count", "Datetimediff", "Fifth","First", "Fourth", "Max","Median","Min","Most Recent","Satisfies All","Satisfies Any","Second","Sum","Third"];
             	this.getSpecificKeyWords(functionKeywords,matches);
             }
             this.completions = new FilteredList(matches);
@@ -1545,7 +1550,7 @@ var Autocomplete = function() {
     };
     
     this.getSpecificKeyWords = function(keyWordArray,matches){
-    	for(i=0;i<keyWordArray.length;i++){
+    	for(var i=0;i<keyWordArray.length;i++){
     		matches.push(
     				{
     	                name: keyWordArray[i],
