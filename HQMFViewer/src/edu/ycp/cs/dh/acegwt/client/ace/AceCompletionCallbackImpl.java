@@ -42,6 +42,7 @@ class AceCompletionCallbackImpl implements AceCompletionCallback {
 		for (AceCompletion proposal : proposals) {
 			jsProposals.push(proposal.toJsObject());
 		}
+		//jsProposals.push(new AceCompletionValue("Do-Daah", "Do-Daah", "Do-Daah", 0).toJsObject());
 		doInvokeWithCompletions(jsProposals);
 	}
 	

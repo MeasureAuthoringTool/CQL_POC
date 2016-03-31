@@ -124,18 +124,23 @@ public class HQMFViewer implements EntryPoint {
 		
 		aceTxtArea.startEditor();
 		
+		setAceEditorProperties(aceTxtArea);		
+		
+		mySplitPanel.setWidgetToggleDisplayAllowed(testVerticalPanel, true);
+
+		tabLayoutPanel.add(mySplitPanel, "test CQL Editor.");
+		tabLayoutPanel.add(splitLayoutPanel, "HQMF Viewer");
+				
+		RootLayoutPanel.get().add(tabLayoutPanel);
+	}
+
+	public void setAceEditorProperties(AceEditor aceTxtArea) {
 		aceTxtArea.setMode(AceEditorMode.CQL);
 		aceTxtArea.setTheme(AceEditorTheme.ECLIPSE);
 		aceTxtArea.getElement().getStyle().setFontSize(14, Unit.PX);
 		aceTxtArea.setHighlightSelectedWord(true);
 		aceTxtArea.setAutocompleteEnabled(true);
-		
-		mySplitPanel.setWidgetToggleDisplayAllowed(testVerticalPanel, true);
-
-		tabLayoutPanel.add(splitLayoutPanel, "HQMF Viewer");
-		tabLayoutPanel.add(mySplitPanel, "test CQL Split Panel.");
-		
-		RootLayoutPanel.get().add(tabLayoutPanel);
+		aceTxtArea.setShowPrintMargin(false);		
 	}
 
 	public RichTextArea getSmartTextArea() {

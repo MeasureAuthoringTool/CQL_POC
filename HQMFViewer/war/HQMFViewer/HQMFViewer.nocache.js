@@ -292,11 +292,11 @@ function HQMFViewer(){
   $stats && $stats({moduleName:'HQMFViewer', sessionId:$sessionId_0, subSystem:'startup', evtGroup:'bootstrap', millis:(new Date).getTime(), type:'selectingPermutation'});
   if (!isHostedMode()) {
     try {
-      unflattenKeylistIntoAnswers(['ie10'], '158C38955EA923EEA149F0DEC1622D80');
-      unflattenKeylistIntoAnswers(['gecko1_8'], '2C53AA36EAD7D03A3056C38BBEB7F541');
-      unflattenKeylistIntoAnswers(['safari'], '3FAC8774729BA53C13F4EFD8B7FF2D4A');
-      unflattenKeylistIntoAnswers(['ie9'], '54F29122689838ADFCBDC03AEBFFBB77');
-      unflattenKeylistIntoAnswers(['ie8'], 'DFB3362C4CD5B977762E358B72AC7515');
+      unflattenKeylistIntoAnswers(['gecko1_8'], '0DFF24BBFE801827E619BA82BB32BAF6');
+      unflattenKeylistIntoAnswers(['ie10'], '3F4388603D077E41633A502610565964');
+      unflattenKeylistIntoAnswers(['safari'], '5CD0F5FDC4E77915186DD53BDA8F9577');
+      unflattenKeylistIntoAnswers(['ie9'], '88502A8026211B3DF6E0F7D189BCD4A2');
+      unflattenKeylistIntoAnswers(['ie8'], 'DAAC02739DF44F501CF1211117960401');
       strongName = answers[computePropValue('user.agent')];
       var idx = strongName.indexOf(':');
       if (idx != -1) {
