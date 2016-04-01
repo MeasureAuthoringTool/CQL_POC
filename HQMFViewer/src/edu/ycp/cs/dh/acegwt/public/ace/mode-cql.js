@@ -23,31 +23,31 @@ var SqlHighlightRules = function() {
 	    var builtinConstants = (
 	        
 	    	//basic constants	
-	    	"true|false|null|QDM|Patient|Population|MeasurementPeriod|" + 
+	    	'true|false|null|QDM|Patient|Population|MeasurementPeriod' + 
 	    	
 	        //data type constants
-	        "Patient Characteristic Clinical Trial Participant|Patient Characteristic Expired|Patient Characteristic Birthdate|" +
-	        "Timing Element|Encounter, Active|Diagnostic Study, Recommended|Substance, Recommended|Procedure, Recommended|Physical Exam, Recommended|Laboratory Test, Recommended|" +
-	        "Intervention, Recommended|Functional Status, Recommended|Encounter, Recommended|Device, Recommended|Transfer To|Transfer From|Substance, Order|Substance, Intolerance|" +
-	        "Substance, Allergy|Substance, Adverse Event|Substance, Administered|Risk Category Assessment|Procedure, Performed|Procedure, Order|Procedure, Intolerance|Procedure, Adverse Event|" +
-	        "Communication: From Provider to Patient|Physical Exam, Performed|Physical Exam, Order|Communication: From Patient to Provider|Medication, Order|Medication, Intolerance|" +
-	        "Medication, Dispensed|Medication, Allergy|Medication, Adverse Effects|Communication: From Provider to Provider|Medication, Administered|Medication, Active|" +
-	        "Laboratory Test, Performed|Laboratory Test, Order|Laboratory Test, Intolerance|Laboratory Test, Adverse Event|Intervention, Performed|Intervention, Order|" +
-	        "Care Goal|Intervention, Intolerance|Intervention, Adverse Event|Provider Characteristic|Patient Characteristic|Functional Status, Performed|Functional Status, Order|" +
-	        "Encounter, Performed|Encounter, Order|Provider Care Experience|Diagnostic Study, Performed|Diagnostic Study, Order|Diagnostic Study, Intolerance|Diagnostic Study, Adverse Event|" +
-	        "Device, Order|Device, Intolerance|Device, Applied|Device, Allergy|Diagnosis|Diagnosis, Active|Immunization, Intolerance|Immunization, Allergy|Immunization, Order|Immunization, Administered|" +
-	        "Device, Adverse Event|Medication, Discharge|Patient Characteristic Race|Patient Characteristic Ethnicity|Patient Characteristic Sex|Patient Characteristic Payer|Patient Care Experience|" +
+	        '"Patient Characteristic Clinical Trial Participant"|"Patient Characteristic Expired"|"Patient Characteristic Birthdate"|' +
+	        '"Timing Element"|"Encounter, Active"|"Diagnostic Study, Recommended"|"Substance, Recommended"|"Procedure, Recommended"|"Physical Exam, Recommended"|"Laboratory Test, Recommended"|' +
+	        '"Intervention, Recommended"|"Functional Status, Recommended"|"Encounter, Recommended"|"Device, Recommended"|"Transfer To"|"Transfer From"|"Substance, Order"|"Substance, Intolerance"|' +
+	        '"Substance, Allergy"|"Substance, Adverse Event"|"Substance, Administered"|"Risk Category Assessment"|"Procedure, Performed"|"Procedure, Order"|"Procedure, Intolerance"|"Procedure, Adverse Event"|' +
+	        '"Communication: From Provider to Patient"|"Physical Exam, Performed"|"Physical Exam, Order"|"Communication: From Patient to Provider"|"Medication, Order"|"Medication, Intolerance"|' +
+	        '"Medication, Dispensed"|"Medication, Allergy"|"Medication, Adverse Effects"|"Communication: From Provider to Provider"|"Medication, Administered"|"Medication, Active"|' +
+	        '"Laboratory Test, Performed"|"Laboratory Test, Order"|"Laboratory Test, Intolerance"|"Laboratory Test, Adverse Event"|"Intervention, Performed"|"Intervention, Order"|' +
+	        '"Care Goal"|"Intervention, Intolerance"|"Intervention, Adverse Event"|"Provider Characteristic"|"Patient Characteristic"|"Functional Status, Performed"|"Functional Status, Order"|' +
+	        '"Encounter, Performed"|"Encounter, Order"|"Provider Care Experience"|"Diagnostic Study, Performed"|"Diagnostic Study, Order"|"Diagnostic Study, Intolerance"|"Diagnostic Study, Adverse Event"|' +
+	        '"Device, Order"|"Device, Intolerance"|"Device, Applied"|"Device, Allergy"|"Diagnosis"|"Immunization, Intolerance"|"Immunization, Allergy"|"Immunization, Order"|"Immunization, Administered"|' +
+	        '"Device, Adverse Event"|"Medication, Discharge"|"Patient Characteristic Race"|"Patient Characteristic Ethnicity"|"Patient Characteristic Sex"|"Patient Characteristic Payer"|"Patient Care Experience"|' +
 	        
 	        //data type attribute constants
-	        "anatomical structure|negation rationale|number|ordinality|patient preference|provider preference|radiation dosage|radiationduration|reaction|reason|refills|" +
-	        "cumulative medication duration|result|route|severity|start datetime|signed datetime|status|stop datetime|dose|Health Record Field|admission datetime|discharge datetime|" +
-	        "environment|discharge status|incision datetime|laterality|length of stay|removal datetime|facility location|facility location arrival datetime|facility location departure datetime|" +
-	        "radiation duration|related to|recorder|source|frequency|hospital location|method"
+	        '"anatomical structure"|"negation rationale"|"number"|"ordinality"|"patient preference"|"provider preference"|"radiation dosage"|"radiationduration"|"reaction"|"reason"|"refills"|' +
+	        '"cumulative medication duration"|"result"|"route"|"severity"|"start datetime"|"signed datetime"|"status"|"stop datetime"|"dose"|"Health Record Field"|"admission datetime"|"discharge datetime"|' +
+	        '"environment"|"discharge status"|"incision datetime"|"laterality"|"length of stay"|"removal datetime"|"facility location"|"facility location arrival datetime"|"facility location departure datetime"|' +
+	        '"radiation duration"|"related to"|"recorder"|"source"|"frequency"|"hospital location"|"method"'
 	        
 	    );
 
 	    var builtinFunctions = (
-	        "date|time|timezone|starts|ends|occurs|overlaps|Interval|Tuple|List|DateTime|AgeInYearsAt"
+	        'date|time|timezone|starts|ends|occurs|overlaps|Interval|Tuple|List|DateTime|AgeInYearsAt'
 	    );
 
     var keywordMapper = this.createKeywordMapper({
@@ -77,7 +77,7 @@ var SqlHighlightRules = function() {
             regex : "[a-zA-Z_$][a-zA-Z0-9_$]*\\b"
         }, {
             token : "keyword.operator",
-            regex : "\\+|\\-|\\/|\\/\\/|%|<@>|@>|<@|&|\\^|~|<|>|<=|=>|==|!=|<>|="
+            regex : "\\+"|"\\-"|"\\/"|"\\/\\/"|"%"|"<@>"|"@>"|"<@"|"&"|"\\^"|"~"|"<"|">"|"<="|"=>"|"=="|"!="|"<>"|"="
         }, {
             token : "paren.lparen",
             regex : "[\\(]"
