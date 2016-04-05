@@ -23,7 +23,7 @@ var SqlHighlightRules = function() {
 	    var builtinConstants = (
 	        
 	    	//basic constants	
-	    	'true|false|null|QDM|Patient|Population|MeasurementPeriod' + 
+	    	'true|false|null|QDM|Patient|Population|MeasurementPeriod|' + 
 	    	
 	        //data type constants
 	        '"Patient Characteristic Clinical Trial Participant"|"Patient Characteristic Expired"|"Patient Characteristic Birthdate"|' +
